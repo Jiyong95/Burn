@@ -11,11 +11,15 @@ import routes from "./routes";
 const app = express();
 
 app.use(cookieParser());
+//cookie를 전달 받아서 사용할 수 있도로 해주는 미들웨어. ex)사용자 인증
 app.use(bodyParser.json());
+//사용자가 웹사이트로 전달하는 정보들을 검사.
+//request정보에서 form이나 json형태로 된 body를 검사.
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(morgan("dev"));
 
+app.use(morgan("dev"));
+//발생하는 모든 정보들을 logging
 
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);

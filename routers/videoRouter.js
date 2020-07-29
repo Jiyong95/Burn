@@ -1,13 +1,14 @@
 import express from "express";
 import routes from "../routes";
+import { videos, upload, videoDetail, editVideo, deleteVideo } from "../controllers/videoController";
 
 const videoRouter = express.Router();
 
-videoRouter.get("/", (req, res) => res.send('Videos'));
-videoRouter.get(routes.upload, (req, res) => res.send('upload'));
-videoRouter.get(routes.videoDetail, (req, res) => res.send('video Detail'));
-videoRouter.get(routes.editVideo, (req, res) => res.send('Edit video'));
-videoRouter.get(routes.deleteVideo, (req, res) => res.send('Delete video'));
+videoRouter.get("/", videos);
+videoRouter.get(routes.upload, upload);
+videoRouter.get(routes.videoDetail, videoDetail);
+videoRouter.get(routes.editVideo, editVideo);
+videoRouter.get(routes.deleteVideo, deleteVideo);
 
 export default videoRouter;
 //파일을 export하겠다는 의미.
