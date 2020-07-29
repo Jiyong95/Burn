@@ -10,6 +10,8 @@ import routes from "./routes";
 
 const app = express();
 
+app.set("view engine", "pug");
+//name, value값 설정해줌. pug로 화면에 표시하기 위함.(in express)
 app.use(cookieParser());
 //cookie를 전달 받아서 사용할 수 있도로 해주는 미들웨어. ex)사용자 인증
 app.use(bodyParser.json());
