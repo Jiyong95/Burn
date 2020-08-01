@@ -1,4 +1,8 @@
-export const home = (req, res) => res.render("home",{pageTitle:"Home"});
+import { videos } from "../db";
+
+export const home = (req, res) => {
+	res.render("home", { pageTitle: "Home", videos });
+};
 //render => views폴더에서 파일명이 home이고 확장자가 pug인 파일을 보여줌.
 //render함수는 인자로 1.템플릿, 2.템플릿에 전달할 객체를 받음.
 export const search = (req, res) => {

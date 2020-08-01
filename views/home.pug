@@ -2,4 +2,5 @@ extends layouts/main
 //- main.pug 코드를 가져오겠다.
 block content
 	.vidoes
-		h1 Video
+		each item in videos
+			h1=item.title
