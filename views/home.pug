@@ -1,6 +1,11 @@
 extends layouts/main
-//- main.pug 코드를 가져오겠다.
+include  mixins/videoBlock
+
 block content
 	.vidoes
 		each item in videos
-			h1=item.title
+			+videoBlock({
+				title:item.title,
+				views:item.views,
+				videoFile:item.videoFile
+			})
