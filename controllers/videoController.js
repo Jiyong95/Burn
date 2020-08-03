@@ -11,9 +11,9 @@ export const search = (req, res) => {
 
 	//검색한 정보가 req.query.term에 들어있음.
 	//console.log(req.query);
-	res.render("search", { pageTitle: "Search" , searchingBy});
-
+	res.render("search", { pageTitle: "Search" , searchingBy, videos});
 }
+
 export const upload = (req, res) => res.render("upload",{pageTitle:"Upload"});
 export const videoDetail = (req, res) => res.render("videoDetail",{pageTitle:"Video Detail"});
 export const editVideo = (req, res) => res.render("editVideo",{pageTitle:"Edit Video"});
