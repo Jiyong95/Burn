@@ -1,4 +1,7 @@
+import multer from "multer";
 import routes from "./routes";
+
+export const multerVideo = multer({ dest: "videos/" });
 
 export const localsMiddleware = (req, res, next) => {
 	res.locals.siteName = "WeTube";
@@ -12,3 +15,7 @@ export const localsMiddleware = (req, res, next) => {
 }
 // local변수들을 global변수로 이용하기 위함.
 // in PUG에서만 해당되는 듯.
+
+export const uploadVideo = multerVideo.single("videoFile");
+//하나의 video만 upload 가능.
+//multer사용법 참조.

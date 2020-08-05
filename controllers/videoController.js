@@ -26,13 +26,18 @@ export const search = (req, res) => {
 export const getUpload = (req, res) =>
 	res.render("upload", { pageTitle: "Upload" });
 
-export const postUpload = (req, res) => {
-	const { body: {
-		file,
-		title,
-		description }
+export const postUpload = async(req, res) => {
+	const { body: { title, description },
+		file:{path}
 	} = req;
-	res.redirect(routes.videoDetail(1236));
+	//console.log(file);  multer에 의해 file.path에 url이 저장됨을 확인.
+	const newVideo = await Video.create({
+		fileUrl: path,
+		title,
+		description
+	});
+	console.log(newVideo);
+	res.redirect(routes.videoDetail(newVideo.id));
 };
 
 export const videoDetail = (req, res) => res.render("videoDetail",{pageTitle:"Video Detail"});
