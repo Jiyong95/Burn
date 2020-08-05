@@ -1,7 +1,16 @@
 import routes from "../routes";
+import Video from "../models/Video";
 
-export const home = (req, res) => {
-	res.render("home", { pageTitle: "Home", videos });
+export const home = async (req, res) => {
+	try {
+		const videos = await Video.find({});
+		//이 문장이 종료될 때까지 다음으로  안넘어감. async + await
+		//DB의 모든 Video를 가져옴.
+		res.render("home", { pageTitle: "Home", videos });
+	} catch (error) {
+		console.log(error);
+		res.render("home", { pageTitle: "Home", videos: [] });
+	}
 };
 //render => views폴더에서 파일명이 home이고 확장자가 pug인 파일을 보여줌.
 //render함수는 인자로 1.템플릿, 2.템플릿에 전달할 객체를 받음.
