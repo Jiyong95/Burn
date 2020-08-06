@@ -1,7 +1,7 @@
 import multer from "multer";
 import routes from "./routes";
 
-export const multerVideo = multer({ dest: "videos/" });
+export const multerVideo = multer({ dest: "uploads/videos/" });
 //videos 디렉토리에 파일 url을 저장하겠다.
 export const localsMiddleware = (req, res, next) => {
 	res.locals.siteName = "WeTube";
