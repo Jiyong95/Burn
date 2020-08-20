@@ -3,7 +3,8 @@ import Video from "../models/Video";
 
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({});
+    const videos = await Video.find({}).sort({ _id: -1 });
+    //최신 video가 먼저 나오게 정렬.
     //이 문장이 종료될 때까지 다음으로  안넘어감. async + await
     //DB의 모든 Video를 가져옴.
     res.render("home", { pageTitle: "Home", videos });
@@ -22,7 +23,7 @@ export const search = (req, res) => {
 
   //검색한 정보가 req.query.term에 들어있음.
   //console.log(req.query);
-  res.render("search", { pageTitle: "Search", searchingBy, videos });
+  res.render("search", { pageTitle: "Search", searchingBy });
 };
 
 export const getUpload = (req, res) =>
@@ -89,6 +90,8 @@ export const deleteVideo = async (req, res) => {
   } = req;
   try {
     await Video.findOneAndRemove({ _id: id });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
   res.redirect(routes.home);
 };
