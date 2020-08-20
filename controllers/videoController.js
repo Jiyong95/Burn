@@ -15,15 +15,26 @@ export const home = async (req, res) => {
 };
 //render => views폴더에서 파일명이 home이고 확장자가 pug인 파일을 보여줌.
 //render함수는 인자로 1.템플릿, 2.템플릿에 전달할 객체를 받음.
-export const search = (req, res) => {
+export const search = async (req, res) => {
   const {
     query: { term: searchingBy },
   } = req;
   //const searchingBy = req.query.term;과 같음.
-
+  let videos = [];
+  //let은 값을 바꿀 수 있음. vs  const
+  //try문에서 searchingBy를 찾으면 videos에 reassign됨.
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" },
+    });
+    //regex:정규표현식임. 즉, searchingBy가 들어간 모든 걸 찾음.
+    //options : i => 대소문자 구분안한다.
+  } catch (error) {
+    console.log(error);
+  }
   //검색한 정보가 req.query.term에 들어있음.
   //console.log(req.query);
-  res.render("search", { pageTitle: "Search", searchingBy });
+  res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
 export const getUpload = (req, res) =>
