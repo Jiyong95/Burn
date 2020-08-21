@@ -3,13 +3,10 @@ import dotenv from "dotenv";
 dotenv.config();
 //.env 파일 안에 있는 정보를 불러오는데 그 정보는 process.env.key에 저장됨.
 //DB url을 숨기기 위한 용도로 사용 됨.
-mongoose.connect(
-	process.env.MONGO_URL,
-	{
-		useNewUrlParser: true,
-		useFindAndModify: false
-	}
-);
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+});
 //별로 중요한건 아님.
 
 const db = mongoose.connection;

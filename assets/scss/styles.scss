@@ -1,3 +1,6 @@
+@import "/config/_variables.scss";
+
 body {
-  background-color: red;
+  background-color: $bgColor;
+  //variables.css파일에 선언한 변수를 입력해주는 듯.
 }
