@@ -38,7 +38,7 @@ const config = {
             //2.plugin을 css에 대해 실행시켜줌.
             options: {
               plugins() {
-                return [autoprefixer({ browsers: "cover 99.5%" })];
+                return [autoprefixer({ overrideBrowserslist: "cover 99.5%" })];
                 //css에 실행시킬 plugin
               },
             },
