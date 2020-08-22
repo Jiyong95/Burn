@@ -11,24 +11,33 @@ const OUTPUT_DIR = path.join(__dirname, "static");
 //ENTRY_FILE을 받아서 OUTPUT_DIR을 현재 디렉토리의 static이라는 폴더에 생성하겠다.
 
 const config = {
-  entry: ENTRY_FILE,
+  entry: ["@babel/polyfill", ENTRY_FILE],
   mode: MODE,
   module: {
     rules: [
       {
+        test: /\.(js)$/,
+        //js파일에 대한 규칙.
+        use: [
+          {
+            loader: "babel-loader",
+          },
+        ],
+      },
+      {
         test: /\.(scss)$/,
         //= scss파일을 찾으면
         use: ExtractCSS.extract([
-          //4. 1~3의 과정을 거친 결과물을 extraction해줌.
+          //4. css를 추출.
           {
             loader: "css-loader",
-            //3.webpack이 css를 이해하도록 가르치는 것.
+            //3.css를 가져옴.
           },
           {
             loader: "postcss-loader",
             //2.plugin을 css에 대해 실행시켜줌.
             options: {
-              plugin() {
+              plugins() {
                 return [autoprefixer({ browsers: "cover 99.5%" })];
                 //css에 실행시킬 plugin
               },
