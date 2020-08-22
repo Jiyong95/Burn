@@ -1,6 +1,5 @@
 @import "/config/_variables.scss";
+@import "config/reset.scss";
+@import "main.scss";
 
-body {
-  background-color: $sexyColor;
-  //variables.css파일에 선언한 변수를 입력해주는 듯.
-}
+@import "partials/header.scss";
