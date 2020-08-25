@@ -22,7 +22,7 @@ const VideoSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment",
-    }
+    },
   ],
 });
 // mongoose documentation schema section 참고.

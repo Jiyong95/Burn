@@ -3,11 +3,13 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import passport from "passport";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 import { localsMiddleware } from "./middlewares";
+import "./passport";
 
 const app = express();
 
@@ -27,6 +29,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(morgan("dev"));
 //발생하는 모든 정보들을 logging
+app.use(passport.initialize());
+app.use(passport.session());
+//seession을 저장해줌.
 app.use(localsMiddleware);
 //PUG에서 사용 가능. 아래 Router에서 쓰려면 import 해주어야함.
 app.use(routes.home, globalRouter);

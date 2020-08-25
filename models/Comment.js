@@ -7,8 +7,8 @@ const CommentSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
-	}
+    default: Date.now,
+  },
 });
 
 const model = mongoose.model("Comment", CommentSchema);
