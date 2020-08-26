@@ -6,6 +6,8 @@ dotenv.config();
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useFindAndModify: false,
+  useUnifiedTopology: true,
+  //mongodb error나길래 추가함.
 });
 //별로 중요한건 아님.
 
