@@ -5,12 +5,13 @@ import {
   editProfile,
   changePassword,
 } from "../controllers/userController";
+import { onlyPrivate } from "../middlewares";
 
 const userRouter = express.Router();
 //export const userRouter = express.Router();
 // 변수만 export하겠다는 의미.
-userRouter.get(routes.editProfile, editProfile);
-userRouter.get(routes.changePassword, changePassword);
+userRouter.get(routes.editProfile, onlyPrivate, editProfile);
+userRouter.get(routes.changePassword, onlyPrivate, changePassword);
 userRouter.get(routes.userDetail(), userDetail);
 // userDetail을 함수로 만들었으니까, 함수를 실행시켜줘야함.
 // userDetail url주소가 users/:id임
