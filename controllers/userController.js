@@ -49,6 +49,8 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
     const user = await User.findOne({ email });
     if (user) {
       user.githubId = id;
+      user.avatarUrl = avatar_url;
+      user.name = name;
       user.save();
       return cb(null, user);
     }
@@ -56,7 +58,7 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
       email,
       name,
       githubId: id,
-      avatarUrl: avatar_url,
+      avatar_url,
     });
     return cb(null, newUser);
   } catch (error) {
@@ -71,6 +73,12 @@ export const postGithubLogin = (req, res) => {
 export const logout = (req, res) => {
   req.logout();
   res.redirect(routes.home);
+};
+
+export const getMe = (req, res) => {
+  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+  //req.uer : 현재 로그인된 사용자.
+  //user : req.user를 통해 userDetail.pug는 user(req.user)를 전달받음.
 };
 
 export const userDetail = (req, res) =>

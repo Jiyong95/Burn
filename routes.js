@@ -13,6 +13,7 @@ const USER_DETAIL = "/:id";
 ///users/1. ":" 만 붙여주면 값이 변하는 것을 인식함.
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
+const ME = "/me";
 
 //Videos
 
@@ -68,6 +69,7 @@ const routes = {
   },
   gitHub: GITHUB,
   githubCallback: GITHUB_CALLBACK,
+  me: ME,
 };
 
 //route object.
