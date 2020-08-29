@@ -24,6 +24,10 @@ const VideoSchema = new mongoose.Schema({
       ref: "Comment",
     },
   ],
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 // mongoose documentation schema section 참고.
 //comments : 해당 Video에 대한 Comment들의 정보들을 연결 시켜주는 것.

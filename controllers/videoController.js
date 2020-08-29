@@ -50,7 +50,10 @@ export const postUpload = async (req, res) => {
     fileUrl: path,
     title,
     description,
+    creator: req.user.id,
   });
+  req.user.videos.push(newVideo.id);
+  req.user.save();
   console.log(newVideo);
   res.redirect(routes.videoDetail(newVideo.id));
 };
@@ -60,7 +63,11 @@ export const videoDetail = async (req, res) => {
     params: { id },
   } = req;
   try {
-    const video = await Video.findById(id);
+    //const video = await Video.findById(id);
+    const video = await Video.findById(id).populate("creator");
+    //populate는 Object ID타입에만 쓸 수 있음. Video모델의 crator, comment등
+    //populate없이는 crator는 id만 갖고있는데 populate쓰면 ref : "User" 객체를 담게 됨.
+    console.log(video);
     //console.log(req.params);
     res.render("videoDetail", { pageTitle: video.title, video });
   } catch (error) {
