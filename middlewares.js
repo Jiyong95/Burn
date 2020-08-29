@@ -1,8 +1,10 @@
 import multer from "multer";
 import routes from "./routes";
 
-export const multerVideo = multer({ dest: "uploads/videos/" });
+const multerVideo = multer({ dest: "uploads/videos/" });
 //videos 디렉토리에 파일 url을 저장하겠다.
+const multerAvatar = multer({ dest: "uploads/avatars/" });
+
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "WeTube";
   res.locals.routes = routes;
@@ -36,3 +38,4 @@ export const uploadVideo = multerVideo.single("videoFile");
 //하나의 video만 upload 가능.
 //videoFile은  upload.pug 파일 name 값으로 설정.
 //multer사용법 참조.
+export const uploadAvatar = multerAvatar.single("avatar");
