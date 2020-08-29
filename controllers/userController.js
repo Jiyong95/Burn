@@ -137,7 +137,7 @@ export const userDetail = async (req, res) => {
   //userDetail에서 route주소를 /:id로했기 때문에 http://localhost:4000/아무숫자(id)
   //아무숫자부분이 id가 되는 거임.
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate("videos");
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     res.redirect(routes.home);
