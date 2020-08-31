@@ -80,7 +80,7 @@ const formatDate = (seconds) => {
 };
 
 function getCurrentTime() {
-  currentTime.innerHTML = formatDate(videoPlayer.currentTime);
+  currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 }
 
 function setTotalTime() {
@@ -90,11 +90,17 @@ function setTotalTime() {
   //getCurrentTime을 1초마다 호출해줌.
 }
 
+function handleEnded() {
+  videoPlayer.currentTime = 0;
+  playBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
+
 function init() {
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   fullScrnBtn.addEventListener("click", goFullScreen);
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  videoPlayer.addEventListener("ended", handleEnded);
 }
 
 if (videoContainer) {
