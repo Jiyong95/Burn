@@ -12,6 +12,8 @@ import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 import { localsMiddleware } from "./middlewares";
+import apiRouter from "./routers/apiRouter";
+
 import "./passport";
 
 const app = express();
@@ -54,5 +56,6 @@ app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 //use의 역할은 /user로 접속시 userRouter 전체를 사용하겠다. 즉, userRouter 전체에서 맞는 주소를 찾음.
 app.use(routes.videos, videoRouter);
+app.use(routes.api, apiRouter);
 
 export default app;
