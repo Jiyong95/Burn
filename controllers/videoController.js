@@ -44,11 +44,13 @@ export const getUpload = (req, res) =>
 export const postUpload = async (req, res) => {
   const {
     body: { title, description },
-    file: { path },
+    file: { location },
+    //console.log(req.file);  multer에 의해 file.path에 url이 저장됨을 확인.
+    //multer가 locl서버에 저장할때는 path를 받지만,
+    //aws S3처럼 외부의 서버에 저장할때는 location을 받음.
   } = req;
-  //console.log(file);  multer에 의해 file.path에 url이 저장됨을 확인.
   const newVideo = await Video.create({
-    fileUrl: path,
+    fileUrl: location,
     title,
     description,
     creator: req.user.id,

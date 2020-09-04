@@ -1,9 +1,35 @@
 import multer from "multer";
+import multerS3 from "multer-s3";
+import aws from "aws-sdk";
 import routes from "./routes";
 
-const multerVideo = multer({ dest: "uploads/videos/" });
-//videos 디렉토리에 파일 url을 저장하겠다.
-const multerAvatar = multer({ dest: "uploads/avatars/" });
+const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_KEY,
+  secretAccessKey: process.env.AWS_PRIVATE_KEY,
+  region: "ap-northeast-2",
+});
+
+const multerVideo = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "wetube1995/video",
+  }),
+});
+
+const multerAvatar = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "wetube1995/avartar",
+  }),
+});
+
+export const uploadVideo = multerVideo.single("videoFile");
+//하나의 video만 upload 가능.
+//videoFile은  upload.pug 파일 name 값으로 설정.
+//multer사용법 참조.
+export const uploadAvatar = multerAvatar.single("avatar");
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "WeTube";
@@ -33,9 +59,3 @@ export const onlyPrivate = (req, res, next) => {
     res.redirect(routes.home);
   }
 };
-
-export const uploadVideo = multerVideo.single("videoFile");
-//하나의 video만 upload 가능.
-//videoFile은  upload.pug 파일 name 값으로 설정.
-//multer사용법 참조.
-export const uploadAvatar = multerAvatar.single("avatar");
