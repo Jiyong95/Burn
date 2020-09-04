@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
   try {
@@ -64,7 +65,9 @@ export const videoDetail = async (req, res) => {
   } = req;
   try {
     //const video = await Video.findById(id);
-    const video = await Video.findById(id).populate("creator");
+    const video = await Video.findById(id)
+      .populate("creator")
+      .populate("comments");
     //populate는 Object ID타입에만 쓸 수 있음. Video모델의 crator, comment등
     //populate없이는 crator는 id만 갖고있는데 populate쓰면 ref : "User" 객체를 담게 됨.
     console.log(video);
@@ -136,6 +139,29 @@ export const postRegisterView = async (req, res) => {
     video.views += 1;
     video.save();
     res.status(200);
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+// Add Comment
+
+export const postAddComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { comment },
+    user,
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    const newComment = await Comment.create({
+      text: comment,
+      creator: user.id,
+    });
+    video.comments.push(newComment.id);
+    video.save();
   } catch (error) {
     res.status(400);
   } finally {
