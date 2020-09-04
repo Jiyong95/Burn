@@ -161,6 +161,8 @@ export const postAddComment = async (req, res) => {
       creator: user.id,
     });
     video.comments.push(newComment.id);
+    //최근 댓글이 제일 먼저 보이게 하기 위해 저장시에 push대신 append써도됨.
+    //근데 videoDetail.pug에 표시를 reverse로 했기 때문에, 서로 바꾸던가하면 됨.
     video.save();
   } catch (error) {
     res.status(400);
