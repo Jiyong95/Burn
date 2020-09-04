@@ -4,9 +4,13 @@ const addCommentForm = document.getElementById("jsAddComment");
 const commentList = document.getElementById("jsCommentList");
 const commentNumber = document.getElementById("jsCommentNumber");
 
+//comment 숫자 늘려주는 함수.
 const increaseNumber = () => {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
+  //commentNumber이 string이니까 parseInt로 int형으로 바꿔줌.
 };
+
+//comment 추가함수.
 const addComment = (comment) => {
   const li = document.createElement("li");
   const span = document.createElement("span");
