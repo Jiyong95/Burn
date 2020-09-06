@@ -44,13 +44,15 @@
   },
   "scripts": {
     "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore '.scss' --ignore 'static' ",
-    "dev:assets": "cd src && cross-env WEBPACK_ENV=development webpack -w",
-    "build:assets": "cd src && cross-env WEBPACK_ENV=production webpack",
+    "dev:assets": "cd src && WEBPACK_ENV=development webpack -w",
+    "build:assets": "cd src && WEBPACK_ENV=production webpack",
     "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
-    "copyAll": "xcopy src\\static build\\static && xcopy src\\views build\\views && xcopy src\\views\\layouts build\\views\\layouts && xcopy src\\views\\mixins build\\views\\mixins && xcopy src\\views\\partials build\\views\\partials",
+    "copyAll": "cp -R src/static build && cp -R src/views build",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
-    "prebuild": "rd /s \"build\"",
-    "start": "node build/init.js"
+    "prebuild": "rm -rf build",
+    "tunnel": "lt --port 4000",
+    "start": "PRODUCTION=true node build/init.js",
+    "prestart": "npm run build"
   },
   "devDependencies": {
     "eslint": "^7.7.0",
