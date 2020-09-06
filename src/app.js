@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import passport from "passport";
 import mongoose from "mongoose";
 import session from "express-session";
+import path from "path";
 import MongoStore from "connect-mongo";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -23,9 +24,8 @@ const CookieStore = MongoStore(session);
 app.use(helmet());
 app.set("view engine", "pug");
 //name, value값 설정해줌. pug로 화면에 표시하기 위함.(in express)
-app.use("/uploads", express.static("uploads"));
-//express.static() => 주어진 dir에서 file을 전달하는 middleware function
-app.use("/static", express.static("static"));
+app.set("views", path.join(__dirname, "views"));
+app.use("/static", express.static(path.join(__dirname, "static")));
 
 app.use(cookieParser());
 //cookie를 전달 받아서 사용할 수 있도로 해주는 미들웨어. ex)사용자 인증
