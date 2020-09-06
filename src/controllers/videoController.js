@@ -118,7 +118,7 @@ export const deleteVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    if (video.creator !== req.user.id) {
+    if (String(video.creator) != req.user.id) {
       throw Error();
       //try안에 error()발생하면 자동으로 catch로 감.
     } else {
