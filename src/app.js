@@ -7,6 +7,7 @@ import passport from "passport";
 import mongoose from "mongoose";
 import session from "express-session";
 import path from "path";
+import flash from "express-flash";
 import MongoStore from "connect-mongo";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -50,6 +51,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 //seession을 저장해줌.
+app.use(flash());
+//local messages를 사용가능하게 해줌. ex) main.pug
 app.use(localsMiddleware);
 //PUG에서 사용 가능. 아래 Router에서 쓰려면 import 해주어야함.
 app.use(routes.home, globalRouter);
