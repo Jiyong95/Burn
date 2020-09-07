@@ -86,7 +86,7 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    if (req.user.id != video.creator) {
+    if (String(req.user.id) != video.creator) {
       throw Error();
       //try안에 error()발생하면 자동으로 catch로 감.
     } else {

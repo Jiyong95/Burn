@@ -6,6 +6,7 @@ dotenv.config();
 mongoose.connect(
   process.env.PRODUCTION ? process.env.MONGO_URL_PROD : process.env.MONGO_URL,
   {
+    //env.PRODUCTION은 .json파일의 start script에 명시되어있음.
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true,

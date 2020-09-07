@@ -16,7 +16,7 @@ passport.use(
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
       callbackURL: process.env.PRODUCTION
-        ? `https://polar-sea-27980.herokuapp.com${routes.githubCallback}`
+        ? `https://frozen-river-07278.herokuapp.com${routes.githubCallback}`
         : `http://localhost:4000${routes.githubCallback}`,
     },
     githubLoginCallback
@@ -30,7 +30,7 @@ passport.use(
       //REST API 키를 사용해야함.
       clientSecret: process.env.KAKAO_SECRET,
       callbackURL: process.env.PRODUCTION
-        ? `https://polar-sea-27980.herokuapp.com${routes.kakaoCallback}`
+        ? `https://frozen-river-07278.herokuapp.com${routes.kakaoCallback}`
         : `http://localhost:4000${routes.kakaoCallback}`,
     },
     kakaoLoginCallback
